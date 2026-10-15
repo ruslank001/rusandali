@@ -4,613 +4,1220 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Тетрадь — конспекты для студентов</title>
+<title>Тетрадь — библиотека конспектов</title>
 <style>
 :root {
-  --ink:#14213d;
-  --text:#1d2433;
-  --muted:#55607a;
+  --ink:#182747;
+  --text:#263247;
+  --muted:#65718a;
   --paper:#fff;
-  --grid:#dfe8f5;
-  --accent:#ffd23f;
-  --link:#2d4a8a;
-  --error:#b3261e;
-  --ok:#1b6e3c;
+  --grid:#e2e9f3;
+  --accent:#ffd447;
+  --blue:#3157a4;
+  --green:#197345;
 }
 *{box-sizing:border-box}
 body{
   margin:0;
-  font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
   color:var(--text);
-  line-height:1.6;
-  background:var(--paper)
+  background:#f6f8fc;
+  line-height:1.65
 }
-h1,h2,h3{
-  font-family:Georgia,"Times New Roman",serif;
-  color:var(--ink);
-  line-height:1.25
-}
-a{color:var(--link)}
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
-:focus-visible{outline:3px solid var(--link);outline-offset:3px}
+a{color:inherit}
 header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  gap:16px;
-  padding:18px 5%;
-  border-bottom:2px solid var(--ink)
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:15px;padding:16px 5%;
+  background:white;border-bottom:2px solid var(--ink)
 }
-.logo{
-  font:bold 1.5rem Georgia,serif;
-  color:var(--ink);
-  text-decoration:none
-}
-nav{display:flex;gap:24px}
-nav a{
-  color:var(--ink);
-  text-decoration:none;
-  border-bottom:3px solid transparent;
-  padding:5px 0
-}
-nav a.active,nav a:hover{border-bottom-color:var(--accent)}
+.logo{font-size:25px;font-weight:900;color:var(--ink);text-decoration:none}
+nav{display:flex;gap:22px;flex-wrap:wrap}
+nav a{text-decoration:none;font-weight:700}
+nav a:hover{color:var(--blue)}
 .menu-toggle{display:none}
-.hero{
-  padding:90px 7%;
-  background-color:var(--paper);
-  background-image:
-    linear-gradient(var(--grid) 1px,transparent 1px),
-    linear-gradient(90deg,var(--grid) 1px,transparent 1px);
-  background-size:28px 28px
-}
-.hero-content{max-width:760px;margin:auto}
-.hero h1{
-  font-size:clamp(2.1rem,5vw,3.6rem);
-  display:inline;
-  background:linear-gradient(transparent 65%,var(--accent) 65%)
-}
-.hero p{
-  font-size:1.15rem;
-  margin:25px 0;
-  background:white;
-  padding:6px
-}
-.section{
-  padding:50px 5%;
-  max-width:1150px;
-  margin:auto
-}
-.lead{font-size:1.1rem;max-width:70ch;color:var(--muted)}
-.btn{
-  display:inline-block;
-  padding:11px 22px;
-  border:2px solid var(--ink);
-  border-radius:8px;
-  background:var(--accent);
-  color:var(--ink);
-  font-weight:700;
-  text-decoration:none
-}
-.btn:hover{background:var(--ink);color:white}
-.btn-ghost{background:white}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:20px;
-  margin-top:25px
-}
-.card{
-  border:2px solid var(--ink);
-  border-radius:10px;
-  padding:22px;
-  background:white;
-  overflow-wrap:anywhere
-}
-.card h3{margin-top:8px}
-.tag{
-  display:inline-block;
-  padding:3px 10px;
-  border-radius:30px;
-  background:var(--grid);
-  font-size:.85rem
-}
-.cta{
-  text-align:center;
-  border-top:2px solid var(--ink)
-}
-.toolbar{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:end;
-  gap:16px;
-  margin:25px 0
-}
-.field{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-  margin-bottom:16px;
-  flex:1
-}
-.toolbar .field{min-width:200px;margin:0}
-label{font-weight:700}
-input,select,textarea{
-  width:100%;
-  padding:11px;
-  border:2px solid #8993a6;
-  border-radius:7px;
-  background:white
-}
-.invalid{border-color:var(--error)}
-.error{color:var(--error);font-size:.9rem}
-.empty{
-  padding:24px;
-  border:2px dashed var(--muted);
-  border-radius:8px
-}
-.two-col{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:24px;
-  align-items:start;
-  margin-top:25px
-}
-dt{font-weight:700;margin-top:12px}
-dd{margin:0;overflow-wrap:anywhere}
-.actions{display:flex;gap:12px;flex-wrap:wrap}
-footer{
-  border-top:2px solid var(--ink);
-  padding:25px 5%;
-  text-align:center;
-  color:var(--muted)
-}
-footer a{margin:0 5px}
-.toast{
-  position:fixed;
-  bottom:25px;
-  left:50%;
-  transform:translateX(-50%);
-  max-width:90%;
-  padding:13px 22px;
-  border-radius:8px;
-  background:var(--ok);
-  color:white;
-  font-weight:700;
-  z-index:10
-}
 .page{display:none}
 .page.active{display:block}
-dialog{
-  width:min(480px,92vw);
-  border:2px solid var(--ink);
-  border-radius:10px;
-  padding:25px
+.hero{
+  padding:75px 7%;
+  background-color:#fff;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),
+  linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:28px 28px
 }
-dialog::backdrop{background:#14213da8}
-@media(max-width:900px){
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .two-col{grid-template-columns:1fr}
+.hero-inner{max-width:850px;margin:auto}
+.hero h1{
+  font-size:clamp(35px,5vw,60px);
+  line-height:1.15;color:var(--ink);
+  background:linear-gradient(transparent 72%,var(--accent) 72%);
+  display:inline
 }
+.hero p{font-size:19px;background:white;max-width:700px;padding:10px 0}
+.section{max-width:1200px;margin:auto;padding:42px 5%}
+h1,h2,h3{color:var(--ink);line-height:1.3}
+h2{font-size:30px}
+.btn{
+  display:inline-block;padding:11px 17px;border:2px solid var(--ink);
+  border-radius:8px;background:var(--accent);color:var(--ink);
+  font-weight:bold;text-decoration:none
+}
+.btn:hover{background:var(--ink);color:white}
+.btn-blue{background:var(--blue);color:white;border-color:var(--blue)}
+.btn-blue:hover{background:#203d7c}
+.btn-light{background:white}
+.btn-small{padding:8px 12px;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.card{
+  background:white;border:1px solid #dce3ee;border-radius:13px;
+  padding:22px;box-shadow:0 4px 14px #1827470a;
+  display:flex;flex-direction:column;align-items:flex-start;
+  min-width:0
+}
+.card h3{font-size:20px;margin:12px 0 8px}
+.card p{color:#59667e;margin-top:0}
+.card .card-bottom{margin-top:auto;padding-top:10px;width:100%}
+.tag{
+  display:inline-block;background:#eaf0ff;color:#27458b;
+  border-radius:20px;padding:4px 11px;font-size:12px;font-weight:bold
+}
+.toolbar{display:flex;gap:14px;flex-wrap:wrap;align-items:end;margin:24px 0}
+.field{display:flex;flex-direction:column;gap:6px;flex:1;min-width:180px}
+label{font-weight:bold}
+input,select,textarea{
+  padding:11px 12px;border:1px solid #aab5c7;
+  border-radius:8px;background:white;width:100%;color:var(--text)
+}
+input:focus,select:focus,textarea:focus{outline:2px solid #7897db}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.note-content{
+  white-space:pre-wrap;overflow-wrap:anywhere;
+  font-size:16px;line-height:1.85;color:#29364b
+}
+.note-content h2{font-size:23px}
+.note-content code{
+  background:#eef2f8;border-radius:4px;padding:2px 5px
+}
+.dialog{
+  width:min(850px,95vw);max-height:90vh;overflow-y:auto;
+  padding:0;border:0;border-radius:15px;
+  box-shadow:0 20px 70px #11182755
+}
+.dialog::backdrop{background:#0d1830bb}
+.dialog-head{
+  position:sticky;top:0;background:white;z-index:2;
+  padding:17px 22px;border-bottom:1px solid #dce3ee;
+  display:flex;justify-content:space-between;align-items:center;gap:12px
+}
+.dialog-head h2{font-size:21px;margin:0}
+.dialog-body{padding:22px}
+.dialog-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.close-btn{
+  border:1px solid #ccd4e1;background:white;border-radius:8px;
+  padding:7px 12px;font-size:20px
+}
+.empty{padding:25px;background:white;border:1px dashed #aab5c7;border-radius:10px}
+.muted{color:var(--muted)}
+footer{background:white;border-top:1px solid #dce3ee;text-align:center;padding:25px}
+.toast{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  padding:12px 20px;background:#17663e;color:white;
+  border-radius:9px;z-index:100;max-width:90%
+}
+.error{color:#b42318;font-size:13px}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){
-  header{padding:15px 5%}
-  .menu-toggle{
-    display:block;
-    padding:8px 13px;
-    border:2px solid var(--ink);
-    border-radius:7px;
-    background:white
-  }
-  nav{
-    display:none;
-    width:100%;
-    flex-direction:column;
-    gap:8px
-  }
+  .grid,.two-col{grid-template-columns:1fr}
+  .hero{padding:45px 6%}
+  .section{padding:30px 5%}
+  .menu-toggle{display:block;padding:8px 12px;background:white;border:1px solid #aaa;border-radius:7px}
+  nav{display:none;width:100%;flex-direction:column;gap:12px}
   nav.open{display:flex}
-  .grid{grid-template-columns:1fr}
-  .hero{padding:55px 6%}
-  .section{padding:35px 5%}
-  .btn{max-width:100%}
+  .toolbar .field{min-width:100%}
+  .dialog-body{padding:16px}
 }
 </style>
 </head>
 <body>
 
 <header>
-  <a class="logo" href="#home" data-page="home">📓 Тетрадь</a>
-  <button class="menu-toggle" id="menu-toggle"
-          aria-expanded="false" aria-controls="nav">Меню</button>
-  <nav id="nav" aria-label="Основная навигация">
+  <a href="#home" class="logo" data-page="home">📓 Тетрадь</a>
+  <button id="menu-toggle" class="menu-toggle" aria-expanded="false">☰ Меню</button>
+  <nav id="nav">
     <a href="#home" data-page="home">Главная</a>
-    <a href="#catalog" data-page="catalog">Каталог</a>
+    <a href="#catalog" data-page="catalog">Каталог конспектов</a>
     <a href="#profile" data-page="profile">Профиль</a>
   </nav>
 </header>
 
 <main>
-  <!-- ГЛАВНАЯ -->
-  <section class="page active" id="home">
-    <div class="hero">
-      <div class="hero-content">
-        <h1>Конспекты, которые помогают сдать сессию</h1>
-        <p>Тетрадь — каталог студенческих конспектов и учебных материалов. Найдите нужную тему или поделитесь собственными записями.</p>
-        <a class="btn" href="#catalog" data-page="catalog">Открыть каталог →</a>
+<section id="home" class="page active">
+  <div class="hero">
+    <div class="hero-inner">
+      <h1>Знания всегда под рукой</h1>
+      <p>Учебная библиотека для студентов. Читай подробные конспекты, повторяй темы и сохраняй собственные материалы.</p>
+      <a class="btn" href="#catalog" data-page="catalog">Открыть библиотеку →</a>
+    </div>
+  </div>
+  <div class="section">
+    <h2>Учись удобнее</h2>
+    <div class="grid">
+      <article class="card">
+        <span class="tag">01 · Чтение</span>
+        <h3>Полные конспекты</h3>
+        <p>Открывай материалы и читай теорию, определения, примеры и выводы целиком.</p>
+      </article>
+      <article class="card">
+        <span class="tag">02 · Поиск</span>
+        <h3>Всё в одном месте</h3>
+        <p>Находи материалы по названию, содержанию и учебному предмету.</p>
+      </article>
+      <article class="card">
+        <span class="tag">03 · Создание</span>
+        <h3>Своя библиотека</h3>
+        <p>Добавляй собственные конспекты и храни их в браузере.</p>
+      </article>
+    </div>
+  </div>
+  <div class="section">
+    <h2>Популярные конспекты</h2>
+    <div class="grid" id="featured"></div>
+    <p style="margin-top:25px">
+      <a class="btn btn-light" href="#catalog" data-page="catalog">Смотреть все конспекты</a>
+    </p>
+  </div>
+</section>
+
+<section id="catalog" class="page">
+  <div class="section">
+    <h1>Библиотека конспектов</h1>
+    <p class="muted">Выбирай материал, нажимай «Открыть конспект» и читай полную версию.</p>
+    <div class="toolbar">
+      <div class="field">
+        <label for="search">Поиск</label>
+        <input id="search" type="search" placeholder="Название, тема или ключевое слово...">
       </div>
-    </div>
-
-    <div class="section">
-      <h2>Какую проблему мы решаем</h2>
-      <p class="lead">Перед экзаменом хорошие конспекты разбросаны по чатам и личным архивам. Найти нужную тему быстро бывает сложно, а свои заметки некуда выложить.</p>
-    </div>
-
-    <div class="section">
-      <h2>Почему это удобно</h2>
-      <div class="grid">
-        <article class="card">
-          <h3>🔎 Быстрый поиск</h3>
-          <p>Введите название темы и найдите подходящие учебные материалы.</p>
-        </article>
-        <article class="card">
-          <h3>📚 Фильтр по предметам</h3>
-          <p>Выберите предмет, чтобы увидеть только нужные конспекты.</p>
-        </article>
-        <article class="card">
-          <h3>✍️ Свои материалы</h3>
-          <p>Добавляйте конспекты в каталог. Они сохраняются в браузере.</p>
-        </article>
+      <div class="field">
+        <label for="subject-filter">Предмет</label>
+        <select id="subject-filter"><option value="">Все предметы</option></select>
       </div>
+      <button id="open-add" class="btn">＋ Добавить конспект</button>
     </div>
+    <p id="result-count" class="muted" aria-live="polite"></p>
+    <div id="materials" class="grid"></div>
+    <p id="empty-message" class="empty" hidden>Конспекты не найдены. Измени поисковый запрос или добавь свой материал.</p>
+  </div>
+</section>
 
-    <div class="section cta">
-      <h2>Готовитесь к экзамену?</h2>
-      <p>Загляните в каталог — возможно, нужный конспект уже там.</p>
-      <a class="btn" href="#catalog" data-page="catalog">Найти конспект</a>
-    </div>
-  </section>
-
-  <!-- КАТАЛОГ -->
-  <section class="page" id="catalog">
-    <div class="section">
-      <h1>Каталог конспектов</h1>
-      <p class="lead">Ищите материалы по названию или предмету. Не нашли свою тему — добавьте конспект самостоятельно.</p>
-
-      <div class="toolbar">
+<section id="profile" class="page">
+  <div class="section">
+    <h1>Профиль студента</h1>
+    <div class="two-col">
+      <form id="profile-form" class="card">
+        <h3>Мои данные</h3>
         <div class="field">
-          <label for="search">Поиск по названию</label>
-          <input id="search" type="search" placeholder="Например, интегралы">
+          <label for="p-name">Имя</label>
+          <input id="p-name" name="name" required minlength="2">
         </div>
         <div class="field">
-          <label for="subject-filter">Предмет</label>
-          <select id="subject-filter">
-            <option value="">Все предметы</option>
-          </select>
+          <label for="p-email">Электронная почта</label>
+          <input id="p-email" name="email" type="email" required>
         </div>
-        <button class="btn" id="open-add" type="button">+ Добавить конспект</button>
-      </div>
-
-      <p id="result-count" class="lead" aria-live="polite"></p>
-      <div class="grid" id="materials"></div>
-      <p id="empty-message" class="empty" hidden>
-        Ничего не найдено. Измените запрос или добавьте свой конспект.
-      </p>
-    </div>
-  </section>
-
-  <!-- ПРОФИЛЬ -->
-  <section class="page" id="profile">
-    <div class="section">
-      <h1>Профиль</h1>
-      <p class="lead">Заполните данные. Они сохранятся в браузере на этом устройстве.</p>
-
-      <div class="two-col">
-        <form id="profile-form" class="card" novalidate>
-          <h2>Редактирование</h2>
-
-          <div class="field">
-            <label for="p-name">Имя</label>
-            <input id="p-name" name="name" type="text">
-            <span class="error"></span>
-          </div>
-
-          <div class="field">
-            <label for="p-email">Электронная почта</label>
-            <input id="p-email" name="email" type="email">
-            <span class="error"></span>
-          </div>
-
-          <div class="field">
-            <label for="p-university">Университет</label>
-            <input id="p-university" name="university" type="text">
-            <span class="error"></span>
-          </div>
-
-          <div class="field">
-            <label for="p-about">О себе</label>
-            <textarea id="p-about" name="about" rows="3"></textarea>
-            <span class="error"></span>
-          </div>
-
-          <button class="btn" type="submit">Сохранить изменения</button>
-        </form>
-
-        <section class="card">
-          <h2>Сохранённые данные</h2>
-          <p id="profile-empty" class="empty">Профиль пока не заполнен.</p>
-          <dl id="profile-data" hidden>
-            <dt>Имя</dt><dd id="v-name"></dd>
-            <dt>Почта</dt><dd id="v-email"></dd>
-            <dt>Университет</dt><dd id="v-university"></dd>
-            <dt>О себе</dt><dd id="v-about"></dd>
-            <dt>Добавлено конспектов</dt><dd id="v-count">0</dd>
-          </dl>
-        </section>
+        <div class="field">
+          <label for="p-university">Учебное заведение</label>
+          <input id="p-university" name="university">
+        </div>
+        <div class="field">
+          <label for="p-about">О себе</label>
+          <textarea id="p-about" name="about" rows="4"></textarea>
+        </div>
+        <button class="btn" type="submit">Сохранить профиль</button>
+      </form>
+      <div class="card">
+        <h3>Моя статистика</h3>
+        <p id="profile-summary" class="muted">Заполни профиль, чтобы увидеть данные.</p>
+        <p>Добавлено собственных конспектов: <strong id="my-count">0</strong></p>
+        <p class="muted">Данные хранятся в браузере этого устройства.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 </main>
 
 <footer>
-  <p>Тетрадь — учебный проект по Fullstack. Конспекты от студентов для студентов.</p>
-  <p>
-    <a href="#home" data-page="home">Главная</a> ·
-    <a href="#catalog" data-page="catalog">Каталог</a> ·
-    <a href="#profile" data-page="profile">Профиль</a>
-  </p>
+  <strong>📓 Тетрадь</strong>
+  <p>Учебные материалы для студентов</p>
+  <p>© 2026 · Учебный проект</p>
 </footer>
 
-<dialog id="add-dialog">
-  <form id="add-form" novalidate>
+<!-- Окно чтения -->
+<dialog id="read-dialog" class="dialog">
+  <div class="dialog-head">
+    <h2 id="read-title">Конспект</h2>
+    <button class="close-btn" id="close-read" aria-label="Закрыть">✕</button>
+  </div>
+  <div class="dialog-body">
+    <span class="tag" id="read-subject"></span>
+    <p class="muted" id="read-description"></p>
+    <hr style="border:0;border-top:1px solid #dce3ee;margin:20px 0">
+    <article id="read-content" class="note-content"></article>
+    <div class="dialog-actions">
+      <button id="copy-note" class="btn btn-blue">Копировать текст</button>
+      <button id="close-read-bottom" class="btn btn-light">Закрыть</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- Окно добавления -->
+<dialog id="add-dialog" class="dialog">
+  <div class="dialog-head">
     <h2>Новый конспект</h2>
-
-    <div class="field">
-      <label for="m-title">Название</label>
-      <input id="m-title" name="title" type="text">
-      <span class="error"></span>
-    </div>
-
-    <div class="field">
-      <label for="m-subject">Предмет</label>
-      <input id="m-subject" name="subject" type="text">
-      <span class="error"></span>
-    </div>
-
-    <div class="field">
-      <label for="m-description">Описание</label>
-      <textarea id="m-description" name="description" rows="3"></textarea>
-      <span class="error"></span>
-    </div>
-
-    <div class="actions">
-      <button class="btn" type="submit">Добавить</button>
-      <button class="btn btn-ghost" id="close-add" type="button">Отмена</button>
-    </div>
-  </form>
+    <button class="close-btn" id="close-add-x" aria-label="Закрыть">✕</button>
+  </div>
+  <div class="dialog-body">
+    <form id="add-form">
+      <div class="field">
+        <label for="m-title">Название конспекта *</label>
+        <input id="m-title" name="title" required minlength="3" placeholder="Например, Основы Python">
+      </div>
+      <div class="field">
+        <label for="m-subject">Предмет *</label>
+        <input id="m-subject" name="subject" required placeholder="Например, Программирование">
+      </div>
+      <div class="field">
+        <label for="m-description">Краткое описание *</label>
+        <textarea id="m-description" name="description" required minlength="10" rows="2" placeholder="О чём этот конспект?"></textarea>
+      </div>
+      <div class="field">
+        <label for="m-content">Полное содержание *</label>
+        <textarea id="m-content" name="content" required minlength="30" rows="12" placeholder="Вставь полный текст конспекта. Можно использовать обычный текст и переносы строк."></textarea>
+      </div>
+      <p class="muted">Поля со звёздочкой обязательны. Содержание можно будет прочитать в отдельном окне.</p>
+      <div class="dialog-actions">
+        <button class="btn" type="submit">Сохранить конспект</button>
+        <button class="btn btn-light" id="close-add" type="button">Отмена</button>
+      </div>
+    </form>
+  </div>
 </dialog>
 
 <script>
-const MATERIALS_KEY = "tetrad_materials";
-const PROFILE_KEY = "tetrad_profile";
+const MATERIALS_KEY = "tetrad_v2_materials";
+const PROFILE_KEY = "tetrad_v2_profile";
 
-const demoMaterials = [
-  {title:"Интегралы: основные приёмы",subject:"Математика",description:"Замена переменной, интегрирование по частям и таблица интегралов."},
-  {title:"Пределы и непрерывность",subject:"Математика",description:"Определения, замечательные пределы и примеры."},
-  {title:"Основы JavaScript",subject:"Программирование",description:"Переменные, функции, массивы и работа с DOM."},
-  {title:"SQL за один вечер",subject:"Программирование",description:"SELECT, JOIN, группировка и подзапросы."},
-  {title:"Законы Ньютона",subject:"Физика",description:"Формулировки, силы, ускорение и решение задач."},
-  {title:"Английские времена",subject:"Языки",description:"Основные времена английского языка с примерами."},
-  {title:"Спрос и предложение",subject:"Экономика",description:"Кривые спроса и предложения, равновесие и эластичность."}
+const demos = [
+{
+ title:"Основы HTML",
+ subject:"Веб-разработка",
+ description:"Структура HTML-документа, основные теги и создание веб-страниц.",
+ content:`ОСНОВЫ HTML
+
+1. Что такое HTML?
+
+HTML (HyperText Markup Language) — язык разметки гипертекста. Он определяет структуру веб-страницы: заголовки, абзацы, ссылки, изображения, таблицы и формы.
+
+HTML не является языком программирования. Он описывает, как организовать содержимое документа.
+
+2. Структура документа
+
+Основные элементы HTML-документа:
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Моя страница</title>
+</head>
+<body>
+  <h1>Привет, мир!</h1>
+  <p>Это моя первая страница.</p>
+</body>
+</html>
+
+DOCTYPE указывает браузеру использовать современный режим отображения.
+html — корневой элемент.
+head — метаданные и подключение ресурсов.
+body — видимое содержимое страницы.
+
+3. Основные теги
+
+<h1> — главный заголовок.
+<h2> — заголовок второго уровня.
+<p> — абзац.
+<a href="https://example.com"> — ссылка.
+<img src="photo.jpg" alt="Описание"> — изображение.
+<ul> и <li> — маркированный список.
+<ol> и <li> — нумерованный список.
+<div> — блочный контейнер.
+<strong> — важный текст.
+<br> — перенос строки.
+
+4. Атрибуты
+
+Атрибуты задают дополнительные свойства элементов. Например, href указывает адрес ссылки, src — источник изображения, alt — альтернативное описание изображения, а class позволяет назначить CSS-класс.
+
+5. Формы
+
+Формы позволяют получать данные пользователя:
+
+<form>
+  <label for="email">Почта</label>
+  <input id="email" type="email">
+  <button type="submit">Отправить</button>
+</form>
+
+Для доступности каждому полю рекомендуется задавать подпись label.
+
+6. Семантическая разметка
+
+<header> — верхняя часть страницы.
+<nav> — навигация.
+<main> — основное содержимое.
+<section> — тематический раздел.
+<article> — самостоятельный материал.
+<footer> — нижняя часть страницы.
+
+7. Итог
+
+HTML формирует структуру сайта. Для оформления применяется CSS, а для интерактивности — JavaScript.`
+},
+{
+ title:"Основы CSS",
+ subject:"Веб-разработка",
+ description:"Селекторы, цвета, отступы, Flexbox, Grid и адаптивная вёрстка.",
+ content:`ОСНОВЫ CSS
+
+1. Что такое CSS?
+
+CSS (Cascading Style Sheets) — язык описания внешнего вида HTML-документов. Он управляет цветами, размерами, отступами, расположением элементов и адаптивностью.
+
+2. Подключение стилей
+
+Внешний файл:
+<link rel="stylesheet" href="style.css">
+
+Внутренние стили:
+<style>
+  p { color: blue; }
+</style>
+
+Встроенный стиль:
+<p style="color: blue">Текст</p>
+
+Для крупных проектов обычно удобнее внешний CSS-файл.
+
+3. Синтаксис
+
+p {
+  color: blue;
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+p — селектор.
+color — свойство.
+blue — значение.
+Каждое объявление заканчивается точкой с запятой.
+
+4. Селекторы
+
+p — все элементы p.
+.card — элементы с class="card".
+#header — элемент с id="header".
+.card p — абзацы внутри .card.
+button:hover — кнопка при наведении.
+
+5. Модель блока
+
+Каждый элемент можно рассматривать как блок из содержимого, внутренних отступов padding, границы border и внешних отступов margin.
+
+Часто используют:
+* { box-sizing: border-box; }
+
+Так ширина элемента включает содержимое, padding и border.
+
+6. Flexbox
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+Flexbox удобно применять для расположения элементов в строку или колонку.
+
+7. CSS Grid
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+Grid удобен для карточек и двухмерных сеток.
+
+8. Адаптивность
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+Медиазапрос позволяет менять оформление в зависимости от ширины экрана.
+
+9. Итог
+
+CSS делает страницы удобными и визуально привлекательными. Хороший интерфейс должен оставаться понятным как на компьютере, так и на телефоне.`
+},
+{
+ title:"Основы JavaScript",
+ subject:"Программирование",
+ description:"Переменные, типы данных, условия, циклы, функции и обработчики событий.",
+ content:`ОСНОВЫ JAVASCRIPT
+
+1. Назначение
+
+JavaScript — язык программирования, который позволяет добавлять веб-страницам интерактивность: проверку форм, фильтрацию списков, обработку нажатий и динамическое изменение содержимого.
+
+2. Переменные
+
+let age = 20;
+const studentName = "Алексей";
+
+let используют для переменных, значение которых может меняться.
+const — для переменных, которым повторно не присваивают значение.
+
+3. Типы данных
+
+string — строки.
+number — числа.
+boolean — true или false.
+undefined — значение не задано.
+null — намеренное отсутствие значения.
+object — объекты и массивы.
+
+4. Условия
+
+const score = 85;
+
+if (score >= 90) {
+  console.log("Отлично");
+} else if (score >= 70) {
+  console.log("Хорошо");
+} else {
+  console.log("Нужно повторить");
+}
+
+Условие if выполняет код в зависимости от результата логического выражения.
+
+5. Циклы
+
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+
+Циклы позволяют многократно выполнять инструкции. Также используются while и for...of.
+
+6. Функции
+
+function sum(a, b) {
+  return a + b;
+}
+
+console.log(sum(2, 3));
+
+Функция принимает параметры и может возвращать результат через return.
+
+7. Массивы
+
+const subjects = ["Математика", "Физика", "Информатика"];
+console.log(subjects[0]);
+subjects.push("Программирование");
+
+Индексация массива начинается с нуля.
+
+8. Работа со страницей
+
+const button = document.querySelector("button");
+
+button.addEventListener("click", () => {
+  alert("Кнопка нажата!");
+});
+
+DOM позволяет находить элементы HTML и изменять их с помощью JavaScript.
+
+9. Итог
+
+HTML отвечает за структуру, CSS — за оформление, JavaScript — за поведение и интерактивность сайта.`
+},
+{
+ title:"Основы Python",
+ subject:"Программирование",
+ description:"Синтаксис Python, переменные, коллекции, функции и обработка ошибок.",
+ content:`ОСНОВЫ PYTHON
+
+1. Введение
+
+Python — язык программирования общего назначения с простым читаемым синтаксисом. Он применяется для автоматизации, анализа данных, веб-разработки и обучения программированию.
+
+2. Первая программа
+
+print("Привет, мир!")
+
+Функция print выводит данные на экран.
+
+3. Переменные и типы
+
+name = "Алия"
+age = 20
+average = 4.5
+is_student = True
+
+Основные типы: str, int, float и bool. Python определяет тип переменной автоматически.
+
+4. Ввод данных
+
+name = input("Введите имя: ")
+age = int(input("Введите возраст: "))
+
+input возвращает строку. Для работы с числом может потребоваться int или float.
+
+5. Условия
+
+if age >= 18:
+    print("Совершеннолетний")
+else:
+    print("Несовершеннолетний")
+
+В Python отступы определяют блоки кода.
+
+6. Циклы
+
+for i in range(5):
+    print(i)
+
+Цикл for перебирает последовательность. while выполняется, пока условие истинно.
+
+7. Списки
+
+numbers = [1, 2, 3, 4]
+numbers.append(5)
+print(numbers[0])
+
+Список хранит упорядоченные элементы. Также применяются кортежи tuple, множества set и словари dict.
+
+8. Функции
+
+def multiply(a, b):
+    return a * b
+
+result = multiply(4, 5)
+print(result)
+
+Функции помогают повторно использовать код и разделять программу на части.
+
+9. Обработка ошибок
+
+try:
+    number = int(input("Число: "))
+except ValueError:
+    print("Нужно ввести целое число")
+
+Обработка исключений позволяет корректно реагировать на неправильные данные.
+
+10. Итог
+
+Python подходит для изучения алгоритмов благодаря простому синтаксису. Для закрепления знаний необходимо регулярно писать и запускать небольшие программы.`
+},
+{
+ title:"Основы SQL и баз данных",
+ subject:"Базы данных",
+ description:"Таблицы, первичные ключи, SELECT, WHERE, JOIN и агрегатные функции.",
+ content:`ОСНОВЫ SQL И БАЗ ДАННЫХ
+
+1. Что такое база данных?
+
+База данных — организованная совокупность данных. Реляционные базы хранят данные в таблицах, состоящих из строк и столбцов.
+
+СУБД — программная система для создания, хранения и управления базами данных. Примеры: PostgreSQL, MySQL и SQLite.
+
+2. Таблицы и ключи
+
+Таблица Students может содержать:
+id, name, group_name.
+
+Первичный ключ PRIMARY KEY однозначно идентифицирует строку.
+Внешний ключ FOREIGN KEY связывает таблицы.
+
+3. Создание таблицы
+
+CREATE TABLE Students (
+  id INTEGER PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  group_name VARCHAR(30)
+);
+
+Типы данных зависят от используемой СУБД.
+
+4. Получение данных
+
+SELECT name, group_name
+FROM Students;
+
+SELECT выбирает столбцы, FROM указывает таблицу.
+
+5. Фильтрация
+
+SELECT *
+FROM Students
+WHERE group_name = 'PI-23';
+
+WHERE задаёт условие отбора строк.
+
+Для сортировки используют ORDER BY:
+SELECT * FROM Students ORDER BY name ASC;
+
+6. Добавление и изменение
+
+INSERT INTO Students (id, name, group_name)
+VALUES (1, 'Алия', 'PI-23');
+
+UPDATE Students
+SET group_name = 'PI-24'
+WHERE id = 1;
+
+DELETE FROM Students
+WHERE id = 1;
+
+Перед UPDATE или DELETE важно проверить условие WHERE.
+
+7. Агрегатные функции
+
+COUNT(*) — количество строк.
+SUM(value) — сумма.
+AVG(value) — среднее.
+MIN(value) — минимум.
+MAX(value) — максимум.
+
+GROUP BY группирует строки для вычислений.
+
+8. Соединение таблиц
+
+SELECT Students.name, Groups.group_name
+FROM Students
+JOIN Groups ON Students.group_id = Groups.id;
+
+JOIN соединяет связанные строки из таблиц.
+
+9. Нормализация
+
+Нормализация помогает уменьшать дублирование и аномалии данных. Связанные сущности обычно разделяют на таблицы и связывают ключами.
+
+10. Итог
+
+SQL применяется для создания таблиц, чтения и изменения данных. При работе с реальной базой необходимо контролировать права доступа и делать резервные копии.`
+},
+{
+ title:"Алгоритмы и блок-схемы",
+ subject:"Информатика",
+ description:"Понятие алгоритма, свойства, ветвление, циклы и оценка сложности.",
+ content:`АЛГОРИТМЫ И БЛОК-СХЕМЫ
+
+1. Определение алгоритма
+
+Алгоритм — конечная последовательность однозначных инструкций, которая приводит к решению поставленной задачи.
+
+2. Основные свойства
+
+Дискретность — алгоритм состоит из отдельных шагов.
+Определённость — каждый шаг имеет понятный смысл.
+Конечность — выполнение завершается за конечное число шагов.
+Результативность — при корректных исходных данных получается результат.
+Массовость — алгоритм применим к целому классу задач.
+
+3. Линейные алгоритмы
+
+Команды выполняются последовательно.
+
+Пример:
+a = 5
+b = 7
+sum = a + b
+
+Результат: 12.
+
+4. Ветвление
+
+Если необходимо выбрать действие по условию, применяется ветвление.
+
+if number > 0:
+    print("Положительное")
+else:
+    print("Ноль или отрицательное")
+
+5. Циклы
+
+Циклы применяются для повторения действий. Количество повторений может быть задано заранее либо определяться условием.
+
+6. Блок-схемы
+
+Овал — начало или конец.
+Прямоугольник — действие или вычисление.
+Ромб — проверка условия.
+Параллелограмм — ввод или вывод данных.
+Стрелки показывают направление выполнения.
+
+7. Пример алгоритма поиска максимума
+
+Даны два числа a и b.
+1. Ввести a и b.
+2. Если a > b, вывести a.
+3. Иначе вывести b.
+4. Завершить выполнение.
+
+8. Сложность алгоритмов
+
+O(1) — постоянное время.
+O(log n) — логарифмическое время.
+O(n) — линейное время.
+O(n²) — квадратичное время.
+
+Обозначение Big O описывает, как растут затраты времени или памяти при увеличении размера входных данных.
+
+9. Итог
+
+Алгоритмы лежат в основе программирования. Правильный выбор алгоритма помогает создавать более быстрые и понятные программы.`
+},
+{
+ title:"Математика: производные",
+ subject:"Математика",
+ description:"Определение производной, таблица правил и примеры вычисления.",
+ content:`МАТЕМАТИКА: ПРОИЗВОДНЫЕ
+
+1. Определение
+
+Производная функции показывает скорость изменения функции по аргументу. Геометрически производная в точке равна угловому коэффициенту касательной к графику, если производная существует.
+
+f'(x) = lim(h→0) [f(x+h)-f(x)] / h
+
+2. Основные правила
+
+(c)' = 0
+(x^n)' = n·x^(n-1)
+(sin x)' = cos x
+(cos x)' = -sin x
+(e^x)' = e^x
+(ln x)' = 1/x при x > 0
+
+3. Производная суммы
+
+(f + g)' = f' + g'
+
+Пример:
+y = x² + 3x
+y' = 2x + 3
+
+4. Производная произведения
+
+(fg)' = f'g + fg'
+
+Пример:
+y = x² sin x
+y' = 2x sin x + x² cos x
+
+5. Производная частного
+
+(f/g)' = (f'g - fg') / g², где g ≠ 0.
+
+6. Производная сложной функции
+
+Если y = f(g(x)), то:
+y' = f'(g(x)) · g'(x)
+
+Пример:
+y = (3x + 1)²
+y' = 2(3x + 1) · 3
+y' = 18x + 6
+
+7. Применение
+
+Производную используют для определения скорости изменения величины, поиска критических точек, исследования возрастания и убывания функций, а также оптимизации.
+
+Если f'(x) > 0 на интервале, функция возрастает на этом интервале.
+Если f'(x) < 0, функция убывает.
+
+8. Пример
+
+Найти производную y = 4x³ - 2x² + 5.
+
+Ответ:
+y' = 12x² - 4x.
+
+9. Итог
+
+При вычислении производной важно правильно применять таблицу производных и правила дифференцирования.`
+},
+{
+ title:"Физика: законы Ньютона",
+ subject:"Физика",
+ description:"Три закона Ньютона, сила, масса, ускорение и примеры задач.",
+ content:`ФИЗИКА: ТРИ ЗАКОНА НЬЮТОНА
+
+1. Основные понятия
+
+Механика изучает движение тел и взаимодействие между ними.
+Скорость характеризует изменение положения тела.
+Ускорение характеризует изменение скорости.
+Сила описывает механическое воздействие на тело.
+
+В системе СИ сила измеряется в ньютонах (Н), масса — в килограммах (кг), ускорение — в м/с².
+
+2. Первый закон Ньютона
+
+Тело сохраняет состояние покоя или равномерного прямолинейного движения, если равнодействующая сил равна нулю.
+
+ΣF = 0
+
+Такое свойство называется инерцией.
+
+3. Второй закон Ньютона
+
+Ускорение тела пропорционально равнодействующей сил и обратно пропорционально массе.
+
+ΣF = ma
+
+Пример:
+Масса тела 2 кг, сила 10 Н.
+a = F/m = 10/2 = 5 м/с².
+
+4. Третий закон Ньютона
+
+При взаимодействии два тела действуют друг на друга силами, равными по модулю и противоположными по направлению.
+
+F₁₂ = -F₂₁
+
+Эти силы приложены к разным телам, поэтому не компенсируют друг друга на одном теле.
+
+5. Сила тяжести
+
+У поверхности Земли:
+F = mg
+
+где g приблизительно равно 9,81 м/с².
+
+6. Сила трения
+
+Сила трения препятствует относительному движению соприкасающихся поверхностей. В простой модели сухого трения скольжения:
+Fтр = μN,
+где μ — коэффициент трения, N — сила нормальной реакции опоры.
+
+7. Как решать задачи
+
+1. Записать известные величины.
+2. Перевести единицы в СИ.
+3. Определить действующие силы.
+4. Выбрать подходящий закон.
+5. Подставить значения и вычислить результат.
+6. Проверить единицы измерения.
+
+8. Итог
+
+Законы Ньютона помогают описывать движение тел и рассчитывать их ускорение под действием сил.`
+},
+{
+ title:"Кибербезопасность: основы",
+ subject:"Информационная безопасность",
+ description:"Конфиденциальность, целостность, доступность, пароли и фишинг.",
+ content:`ОСНОВЫ КИБЕРБЕЗОПАСНОСТИ
+
+1. Понятие
+
+Кибербезопасность — защита информационных систем, сетей и данных от несанкционированного доступа, изменения, раскрытия и нарушения работы.
+
+2. Три основных принципа
+
+Конфиденциальность — данные доступны только уполномоченным лицам.
+Целостность — данные защищены от несанкционированного изменения.
+Доступность — информация и сервисы доступны авторизованным пользователям, когда это необходимо.
+
+3. Пароли
+
+Используйте длинные уникальные пароли или парольные фразы.
+Не повторяйте один пароль на разных сайтах.
+Храните пароли в надёжном менеджере паролей.
+Включайте многофакторную аутентификацию.
+
+4. Фишинг
+
+Фишинг — попытка обманом получить пароль, банковские сведения или другие данные. Злоумышленник может отправлять сообщения с поддельными ссылками и создавать копии настоящих сайтов.
+
+Признаки риска:
+— неожиданные просьбы срочно войти в аккаунт;
+— незнакомый адрес отправителя;
+— подозрительные вложения;
+— домен, похожий на настоящий, но с ошибками.
+
+Не открывайте сомнительные вложения и проверяйте адрес сайта перед вводом пароля.
+
+5. Вредоносное ПО
+
+Вирусы, трояны, шпионские программы и программы-вымогатели могут повреждать файлы, красть данные или блокировать доступ к ним.
+
+6. Обновления
+
+Обновления операционной системы и программ устраняют известные уязвимости. Используйте актуальное программное обеспечение и резервное копирование важных файлов.
+
+7. Безопасность в сетях
+
+Подключайтесь к проверенным Wi-Fi-сетям. Не передавайте конфиденциальные данные через неизвестные сайты. Используйте защищённые соединения и блокировку устройства.
+
+8. Реагирование на инцидент
+
+Если подозреваете компрометацию аккаунта, смените пароль с безопасного устройства, завершите неизвестные сеансы, включите MFA и обратитесь в официальную службу поддержки.
+
+9. Итог
+
+Безопасность зависит не только от программ, но и от действий пользователя. Уникальные пароли, MFA, обновления и внимательность существенно снижают риски.`
+}
 ];
 
 function load(key,fallback){
   try{
     const value=JSON.parse(localStorage.getItem(key));
     return value ?? fallback;
-  }catch{
-    return fallback;
-  }
+  }catch{return fallback}
 }
 function save(key,value){
   localStorage.setItem(key,JSON.stringify(value));
 }
-
-function showToast(message){
-  const old=document.querySelector(".toast");
-  if(old) old.remove();
-  const toast=document.createElement("div");
-  toast.className="toast";
-  toast.setAttribute("role","status");
-  toast.textContent=message;
-  document.body.append(toast);
-  setTimeout(()=>toast.remove(),3000);
+function esc(value){
+  return String(value).replace(/[&<>"']/g,ch=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[ch]);
+}
+function toast(message){
+  document.querySelector(".toast")?.remove();
+  const el=document.createElement("div");
+  el.className="toast";
+  el.setAttribute("role","status");
+  el.textContent=message;
+  document.body.append(el);
+  setTimeout(()=>el.remove(),2800);
 }
 
-function setError(input,message){
-  input.classList.toggle("invalid",Boolean(message));
-  input.nextElementSibling.textContent=message;
-}
-
-/* Переключение страниц */
+/* Навигация */
 function navigate(page){
   if(!document.getElementById(page)) page="home";
-  document.querySelectorAll(".page").forEach(section=>{
-    section.classList.toggle("active",section.id===page);
+  document.querySelectorAll(".page").forEach(el=>{
+    el.classList.toggle("active",el.id===page);
   });
-  document.querySelectorAll("[data-page]").forEach(link=>{
-    if(link.tagName==="A"){
-      if(link.closest("nav")){
-        if(link.dataset.page===page) link.classList.add("active");
-        else link.classList.remove("active");
-      }
-      if(link.dataset.page===page) link.setAttribute("aria-current","page");
-      else link.removeAttribute("aria-current");
-    }
+  document.querySelectorAll("nav [data-page]").forEach(el=>{
+    if(el.dataset.page===page) el.setAttribute("aria-current","page");
+    else el.removeAttribute("aria-current");
   });
   document.getElementById("nav").classList.remove("open");
   document.getElementById("menu-toggle").setAttribute("aria-expanded","false");
   window.scrollTo({top:0,behavior:"smooth"});
 }
-
 document.querySelectorAll("[data-page]").forEach(link=>{
   link.addEventListener("click",event=>{
     event.preventDefault();
     const page=link.dataset.page;
-    history.pushState({page}, "", "#"+page);
+    if(location.hash!=="#"+page) history.pushState({page},"","#"+page);
     navigate(page);
   });
 });
-
-window.addEventListener("popstate",()=>{
-  navigate(location.hash.slice(1)||"home");
-});
-
+window.addEventListener("popstate",()=>navigate(location.hash.slice(1)||"home"));
 document.getElementById("menu-toggle").addEventListener("click",()=>{
   const nav=document.getElementById("nav");
   const opened=nav.classList.toggle("open");
   document.getElementById("menu-toggle").setAttribute("aria-expanded",String(opened));
 });
 
-/* Каталог */
+/* Материалы */
+const customMaterials=load(MATERIALS_KEY,[]);
+let materials=[...demos,...customMaterials].map((m,i)=>({
+  ...m,
+  id:m.id||("material-"+i)
+}));
+
 const list=document.getElementById("materials");
 const search=document.getElementById("search");
 const filter=document.getElementById("subject-filter");
 const empty=document.getElementById("empty-message");
 const count=document.getElementById("result-count");
-const dialog=document.getElementById("add-dialog");
-const addForm=document.getElementById("add-form");
+const readDialog=document.getElementById("read-dialog");
+const addDialog=document.getElementById("add-dialog");
 
-let materials=[...demoMaterials,...load(MATERIALS_KEY,[])];
-
-function fillSubjects(){
-  const current=filter.value;
-  filter.replaceChildren(new Option("Все предметы",""));
-  [...new Set(materials.map(item=>item.subject))].sort().forEach(subject=>{
-    filter.add(new Option(subject,subject));
-  });
-  filter.value=current;
+function cardHTML(m){
+  return `
+    <article class="card">
+      <span class="tag">${esc(m.subject)}</span>
+      <h3>${esc(m.title)}</h3>
+      <p>${esc(m.description)}</p>
+      <div class="card-bottom">
+        <button class="btn btn-blue open-note" data-id="${esc(m.id)}" style="width:100%">
+          📖 Открыть конспект
+        </button>
+      </div>
+    </article>`;
 }
 
-function renderMaterials(){
-  const query=search.value.trim().toLowerCase();
-  const found=materials.filter(item=>
-    item.title.toLowerCase().includes(query) &&
-    (!filter.value||item.subject===filter.value)
-  );
+function renderList(){
+  const query=search.value.trim().toLocaleLowerCase("ru");
+  const subject=filter.value;
 
-  list.replaceChildren();
-
-  found.forEach(item=>{
-    const card=document.createElement("article");
-    card.className="card";
-
-    const tag=document.createElement("span");
-    tag.className="tag";
-    tag.textContent=item.subject;
-
-    const title=document.createElement("h3");
-    title.textContent=item.title;
-
-    const description=document.createElement("p");
-    description.textContent=item.description;
-
-    card.append(tag,title,description);
-    list.append(card);
+  const found=materials.filter(m=>{
+    const searchable=[m.title,m.subject,m.description,m.content].join(" ").toLocaleLowerCase("ru");
+    return searchable.includes(query)&&(!subject||m.subject===subject);
   });
 
+  list.innerHTML=found.map(cardHTML).join("");
   empty.hidden=found.length>0;
   count.textContent="Найдено конспектов: "+found.length;
 }
 
-search.addEventListener("input",renderMaterials);
-filter.addEventListener("change",renderMaterials);
+function renderFeatured(){
+  document.getElementById("featured").innerHTML=materials.slice(0,3).map(cardHTML).join("");
+}
 
-document.getElementById("open-add").addEventListener("click",()=>{
-  addForm.reset();
-  addForm.querySelectorAll(".invalid").forEach(el=>el.classList.remove("invalid"));
-  addForm.querySelectorAll(".error").forEach(el=>el.textContent="");
-  dialog.showModal();
+function fillSubjects(){
+  const previous=filter.value;
+  filter.replaceChildren(new Option("Все предметы",""));
+  [...new Set(materials.map(m=>m.subject))].sort((a,b)=>a.localeCompare(b,"ru"))
+    .forEach(s=>filter.add(new Option(s,s)));
+  if([...filter.options].some(o=>o.value===previous)) filter.value=previous;
+}
+
+function openNote(id){
+  const m=materials.find(item=>String(item.id)===String(id));
+  if(!m) return;
+  document.getElementById("read-title").textContent=m.title;
+  document.getElementById("read-subject").textContent=m.subject;
+  document.getElementById("read-description").textContent=m.description;
+  // Содержание отображается как обычный текст, HTML из конспекта не исполняется.
+  document.getElementById("read-content").textContent=m.content||"Полное содержание пока не добавлено.";
+  readDialog.dataset.currentId=m.id;
+  readDialog.showModal();
+}
+
+document.addEventListener("click",event=>{
+  const button=event.target.closest(".open-note");
+  if(button) openNote(button.dataset.id);
 });
 
-document.getElementById("close-add").addEventListener("click",()=>dialog.close());
+search.addEventListener("input",renderList);
+filter.addEventListener("change",renderList);
 
-addForm.addEventListener("submit",event=>{
+document.getElementById("close-read").addEventListener("click",()=>readDialog.close());
+document.getElementById("close-read-bottom").addEventListener("click",()=>readDialog.close());
+
+document.getElementById("copy-note").addEventListener("click",async()=>{
+  const title=document.getElementById("read-title").textContent;
+  const subject=document.getElementById("read-subject").textContent;
+  const content=document.getElementById("read-content").textContent;
+  const text=`${title}\nПредмет: ${subject}\n\n${content}`;
+  try{
+    await navigator.clipboard.writeText(text);
+    toast("Текст конспекта скопирован!");
+  }catch{
+    const area=document.createElement("textarea");
+    area.value=text;
+    document.body.append(area);
+    area.select();
+    const ok=document.execCommand("copy");
+    area.remove();
+    toast(ok?"Текст конспекта скопирован!":"Не удалось скопировать. Выдели текст вручную.");
+  }
+});
+
+/* Добавление собственного конспекта */
+document.getElementById("open-add").addEventListener("click",()=>{
+  document.getElementById("add-form").reset();
+  addDialog.showModal();
+});
+document.getElementById("close-add").addEventListener("click",()=>addDialog.close());
+document.getElementById("close-add-x").addEventListener("click",()=>addDialog.close());
+
+document.getElementById("add-form").addEventListener("submit",event=>{
   event.preventDefault();
-  const title=addForm.elements.title;
-  const subject=addForm.elements.subject;
-  const description=addForm.elements.description;
+  const form=event.currentTarget;
+  if(!form.reportValidity()) return;
 
-  setError(title,title.value.trim().length<3?"Название: минимум 3 символа.":"");
-  setError(subject,subject.value.trim()===""?"Укажите предмет.":"");
-  setError(description,description.value.trim().length<10?"Описание: минимум 10 символов.":"");
-
-  if(addForm.querySelector(".invalid")) return;
-
-  const added={
-    title:title.value.trim(),
-    subject:subject.value.trim(),
-    description:description.value.trim()
+  const m={
+    id:"custom-"+Date.now(),
+    title:form.elements.title.value.trim(),
+    subject:form.elements.subject.value.trim(),
+    description:form.elements.description.value.trim(),
+    content:form.elements.content.value.trim()
   };
 
-  const custom=load(MATERIALS_KEY,[]);
-  custom.push(added);
-  save(MATERIALS_KEY,custom);
-  materials.push(added);
+  if(m.title.length<3||m.description.length<10||m.content.length<30){
+    toast("Заполни поля подробнее.");
+    return;
+  }
 
-  dialog.close();
+  const stored=load(MATERIALS_KEY,[]);
+  stored.push(m);
+  try{
+    save(MATERIALS_KEY,stored);
+  }catch{
+    toast("Не удалось сохранить. Возможно, хранилище браузера заполнено.");
+    return;
+  }
+
+  materials.push(m);
+  addDialog.close();
   fillSubjects();
-  renderMaterials();
-  showToast("Конспект добавлен!");
+  renderList();
+  renderFeatured();
+  updateProfile();
+  search.value="";
+  filter.value=m.subject;
+  renderList();
+  navigate("catalog");
+  toast("Конспект успешно добавлен!");
 });
 
 /* Профиль */
 const profileForm=document.getElementById("profile-form");
-const profileFields=["name","email","university","about"];
-
-function showProfile(){
+function updateProfile(){
   const profile=load(PROFILE_KEY,null);
-  document.getElementById("profile-empty").hidden=Boolean(profile);
-  document.getElementById("profile-data").hidden=!profile;
-  document.getElementById("v-count").textContent=load(MATERIALS_KEY,[]).length;
+  document.getElementById("my-count").textContent=load(MATERIALS_KEY,[]).length;
+  document.getElementById("profile-summary").textContent=profile
+    ?`Имя: ${profile.name}\nПочта: ${profile.email}\nУниверситет: ${profile.university||"Не указан"}`
+    :"Заполни профиль, чтобы увидеть данные.";
 
-  if(!profile) return;
-
-  profileFields.forEach(field=>{
-    document.getElementById("v-"+field).textContent=profile[field]||"—";
-    profileForm.elements[field].value=profile[field]||"";
-  });
+  if(profile){
+    ["name","email","university","about"].forEach(key=>{
+      profileForm.elements[key].value=profile[key]||"";
+    });
+  }
 }
-
 profileForm.addEventListener("submit",event=>{
   event.preventDefault();
-
-  const name=profileForm.elements.name;
-  const email=profileForm.elements.email;
-  const university=profileForm.elements.university;
-  const about=profileForm.elements.about;
-
-  setError(name,name.value.trim().length<2?"Введите имя (минимум 2 символа).":"");
-  setError(email,/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())?"":"Введите почту в формате name@example.com.");
-  setError(university,university.value.trim()===""?"Укажите университет.":"");
-
-  if(profileForm.querySelector(".invalid")) return;
-
-  save(PROFILE_KEY,{
-    name:name.value.trim(),
-    email:email.value.trim(),
-    university:university.value.trim(),
-    about:about.value.trim()
+  if(!profileForm.reportValidity()) return;
+  const data={};
+  ["name","email","university","about"].forEach(key=>{
+    data[key]=profileForm.elements[key].value.trim();
   });
-
-  showProfile();
-  showToast("Профиль сохранён!");
+  try{
+    save(PROFILE_KEY,data);
+    updateProfile();
+    toast("Профиль сохранён!");
+  }catch{
+    toast("Не удалось сохранить профиль.");
+  }
 });
 
 fillSubjects();
-renderMaterials();
-showProfile();
+renderList();
+renderFeatured();
+updateProfile();
 navigate(location.hash.slice(1)||"home");
 </script>
 </body>
 </html>
-
